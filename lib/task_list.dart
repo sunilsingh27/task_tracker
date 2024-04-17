@@ -47,44 +47,45 @@ class _TaskListState extends State<TaskList> {
       appBar: AppBar(
         backgroundColor: Colors.blue[700],
 
-        title: Center(child: Text('Task Tracker',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25))),
+        title: Center(child: Text('Task Tracker',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black87))),
       ),
-      body: Expanded(
-        flex: 5,
-        child: ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (context, index) {
-            Task task = tasks[index];
-            return ListTile(
-              title: Text(task.title),
-              subtitle: Text(task.description),
-              leading: Checkbox(
-                value: task.isCompleted,
-                onChanged: (value) {
-                  setState(() {
-                    task.isCompleted = value!;
-                    _saveTasks();
-                  });
-                },
-              ),
-              trailing: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  setState(() {
-                    tasks.removeAt(index);
-                    _saveTasks();
-                  });
-                },
-              ),
-            );
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddTaskDialog(context);
+      body: ListView.builder(
+        itemCount: tasks.length,
+        itemBuilder: (context, index) {
+          Task task = tasks[index];
+          return ListTile(
+            title: Text(task.title),
+            subtitle: Text(task.description),
+            leading: Checkbox(
+              value: task.isCompleted,
+              onChanged: (value) {
+                setState(() {
+                  task.isCompleted = value!;
+                  _saveTasks();
+                });
+              },
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                setState(() {
+                  tasks.removeAt(index);
+                  _saveTasks();
+                });
+              },
+            ),
+          );
         },
-        child: Icon(Icons.add),
+      ),
+
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: ElevatedButton(
+            onPressed: () {
+              _showAddTaskDialog(context);
+            },
+            child: Icon(Icons.add),
+          ),
       ),
     );
   }
