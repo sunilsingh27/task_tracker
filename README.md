@@ -1,5 +1,8 @@
 # task_tracker
-
+#used dart 3.3.3
+#used flutter 3.19.5 stable version 
+#used openjdk22
+#used android stidio 
 A new Flutter project.
 
 ## Getting Started
